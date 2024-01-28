@@ -71,7 +71,7 @@ class _AddTaskState extends State<AddTask> {
                 }
               },
               style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
-              child: CustomButtonText(text: "Add Note",),
+              child: const CustomButtonText(text: "Add Note",),
             )
           ],
         ),
