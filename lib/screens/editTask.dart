@@ -29,56 +29,53 @@ class _EditTaskState extends State<EditTask> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Padding(
-          padding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
-          child: ListView(
-            children: [
-              Form(
-                key: formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const  CutomTextTitle(text: 'Edit Task'),
-                    const SizedBox(height: 20),
-                    customTextFomeField(text: taskController.title, label: 'Title', validator: (value) => value!.trim().isEmpty?"Please Enter the title":null,readOnly: false),
-                    const SizedBox(height: 20),
-                    customTextFomeField(text: taskController.dateTime, label: 'Data', validator: (value) => value!.trim().isEmpty?"Please Enter the date":null,onTap: () {
-                      taskController.handleDataPicker(context);
-                    },readOnly: true),
-                    const SizedBox(height: 20),
-                  ],
-                ),
+      body: Padding(
+        padding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
+        child: Column(
+          children: [
+            Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const  CutomTextTitle(text: 'Edit Task'),
+                  const SizedBox(height: 20),
+                  customTextFomeField(text: taskController.title, label: 'Title', validator: (value) => value!.trim().isEmpty?"Please Enter the title":null,readOnly: false),
+                  const SizedBox(height: 20),
+                  customTextFomeField(text: taskController.dateTime, label: 'Data', validator: (value) => value!.trim().isEmpty?"Please Enter the date":null,onTap: () {
+                    taskController.handleDataPicker(context);
+                  },readOnly: true),
+                  const SizedBox(height: 20),
+                ],
               ),
-              ElevatedButton(
-                onPressed: () {
-                  if(formKey.currentState!.validate())
-                  {
-                    // Task task = Task(title: title.text,time:currentTime.toIso8601String(),);//this one also currect
-                    Task task = Task(id: task_t.id,title: taskController.title.text,time:ConvertDate.convertTimeFromDateTimeToString(taskController.currentTime));
-                    taskDatabaseController.updateTask(task:task);
-                    Get.back();
-                  }
-                },
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
-                child:  const CustomButtonText(text:"Edit Task",),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  if(formKey.currentState!.validate())
-                  {
-                    // Task task = Task(title: title.text,time:currentTime.toIso8601String(),);//this one also currect
-                    Task task = Task(id: task_t.id,title: taskController.title.text,time:ConvertDate.convertTimeFromDateTimeToString(taskController.currentTime));
-                    taskDatabaseController.deleteTask(id:task.id!);
-                    Get.back();
-                  }
-                },
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
-                child:  const CustomButtonText(text:"Delete Task",),
-              )
-            ],
-          ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if(formKey.currentState!.validate())
+                {
+                  // Task task = Task(title: title.text,time:currentTime.toIso8601String(),);//this one also currect
+                  Task task = Task(id: task_t.id,title: taskController.title.text,time:ConvertDate.convertTimeFromDateTimeToString(taskController.currentTime));
+                  taskDatabaseController.updateTask(task:task);
+                  Get.back();
+                }
+              },
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
+              child:  const CustomButtonText(text:"Edit Task",),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if(formKey.currentState!.validate())
+                {
+                  // Task task = Task(title: title.text,time:currentTime.toIso8601String(),);//this one also currect
+                  Task task = Task(id: task_t.id,title: taskController.title.text,time:ConvertDate.convertTimeFromDateTimeToString(taskController.currentTime));
+                  taskDatabaseController.deleteTask(id:task.id!);
+                  Get.back();
+                }
+              },
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
+              child:  const CustomButtonText(text:"Delete Task",),
+            )
+          ],
         ),
       ),
     );
