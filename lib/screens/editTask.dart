@@ -64,13 +64,10 @@ class _EditTaskState extends State<EditTask> {
             ),
             ElevatedButton(
               onPressed: () {
-                if(formKey.currentState!.validate())
-                {
                   // Task task = Task(title: title.text,time:currentTime.toIso8601String(),);//this one also currect
                   Task task = Task(id: task_t.id,title: taskController.title.text,time:ConvertDate.convertTimeFromDateTimeToString(taskController.currentTime));
                   taskDatabaseController.deleteTask(id:task.id!);
                   Get.back();
-                }
               },
               style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
               child:  const CustomButtonText(text:"Delete Task",),
